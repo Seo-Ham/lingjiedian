@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero Block Preview</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        background: '#0a0a0a',
+        foreground: '#fafafa',
+        primary: '#3b82f6',
+        'primary-foreground': '#ffffff',
+        secondary: '#1a1a1a',
+        muted: '#262626',
+        'muted-foreground': '#a3a3a3',
+        border: '#262626',
+      }
+    }
+  }
+}
+</script>
+<style>
+  @keyframes float {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, 10px); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .anim-fade-up-1 { animation: fadeUp 0.6s 0.3s both; }
+  .anim-fade-up-2 { animation: fadeUp 0.6s 0.4s both; }
+  .anim-fade-up-3 { animation: fadeUp 0.6s 0.5s both; }
+  .anim-fade-up-4 { animation: fadeUp 0.6s 0.6s both; }
+  .anim-scale-in { animation: scaleIn 0.5s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+  .anim-fade-in  { animation: fadeIn 0.6s 0.7s both; }
+  .anim-bounce-arrow { animation: float 1.5s 1.5s ease-in-out infinite; }
+  .social-icon:hover { background: var(--tw-bg-primary, #3b82f6); color: var(--tw-text-primary-foreground, #fff); }
+</style>
+</head>
+<body class="m-0 p-0">
+
+<!-- ==========================================================================
+     Hero Block — shadcn/ui style, ported to plain HTML + Tailwind CDN
+     Original: framer-motion animations simulated with CSS keyframes
+     ========================================================================== -->
+<section class="relative flex items-center justify-center overflow-hidden bg-background min-h-screen w-full">
+
+  <!-- Grid background -->
+  <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+
+  <div class="relative z-10 mx-auto max-w-5xl text-center px-4">
+
+    <!-- Avatar circle -->
+    <div class="anim-scale-in mb-6 inline-block">
+      <div class="mx-auto h-24 w-24 rounded-full border-4 border-background bg-gradient-to-br from-blue-500 to-neutral-600 shadow-lg"></div>
+    </div>
+
+    <!-- Headline -->
+    <h1 class="anim-fade-up-1 mb-6 text-5xl font-bold text-foreground md:text-7xl">
+      Full Stack Developer
+    </h1>
+
+    <!-- Description -->
+    <p class="anim-fade-up-2 mx-auto mb-8 max-w-3xl text-xl text-muted-foreground md:text-2xl">
+      Crafting beautiful, performant web applications with modern
+      technologies. Passionate about clean code and exceptional user
+      experiences.
+    </p>
+
+    <!-- Buttons -->
+    <div class="anim-fade-up-3 mb-12 flex flex-wrap justify-center gap-4">
+      <button class="gap-2 inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-blue-600 h-11 px-8 text-base font-medium transition-colors">
+        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Get in Touch
+      </button>
+      <button class="gap-2 inline-flex items-center justify-center rounded-md border border-neutral-700 bg-transparent text-foreground hover:bg-neutral-800 h-11 px-8 text-base font-medium transition-colors">
+        View Projects
+        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+      </button>
+    </div>
+
+    <!-- Social icons -->
+    <div class="anim-fade-in flex justify-center gap-4">
+      <a href="#" class="flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-foreground transition-colors hover:bg-primary hover:text-primary-foreground">
+        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+      </a>
+      <a href="#" class="flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-foreground transition-colors hover:bg-primary hover:text-primary-foreground">
+        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="#" class="flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-foreground transition-colors hover:bg-primary hover:text-primary-foreground">
+        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Bouncing scroll arrow -->
+  <div class="anim-bounce-arrow absolute bottom-8 left-1/2">
+    <svg class="h-6 w-6 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+  </div>
+</section>
+
+</body>
+</html>

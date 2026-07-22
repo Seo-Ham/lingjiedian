@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>零碳园区招标平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   Apple Design Tokens
+   ========================================================================== */
+:root {
+  --apple-bg-white:       #FFFFFF;
+  --apple-bg-dark:        #1D1D1F;
+  --apple-bg-light-gray:  #F5F5F7;
+  --apple-bg-elevated:    #FBFBFD;
+
+  --apple-text-primary:   #1D1D1F;
+  --apple-text-secondary: #6E6E73;
+  --apple-text-tertiary:  #86868B;
+  --apple-text-on-dark:   #F5F5F7;
+  --apple-text-white:     #FFFFFF;
+
+  --apple-link-blue:       #0066CC;
+  --apple-link-blue-hover: #0077ED;
+
+  --apple-section-gap:      100px;
+  --apple-section-gap-sm:   80px;
+  --apple-component-gap-sm: 16px;
+  --apple-component-gap-md: 32px;
+  --apple-component-gap-lg: 48px;
+  --apple-card-padding:     32px;
+  --apple-card-padding-sm:  24px;
+  --apple-content-max-width:    980px;
+  --apple-content-max-width-lg: 1200px;
+
+  --apple-weight-title:       600;
+  --apple-weight-title-bold:  700;
+  --apple-weight-title-heavy: 800;
+  --apple-weight-title-black: 900;
+  --apple-weight-body:        400;
+  --apple-weight-body-medium: 500;
+
+  --apple-radius-card:    18px;
+  --apple-radius-card-sm: 12px;
+  --apple-radius-card-lg: 20px;
+  --apple-radius-button:  980px;
+  --apple-radius-badge:   8px;
+
+  --apple-shadow-card:  0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.08);
+  --apple-shadow-hover: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.12);
+
+  --apple-gradient-bg-dark: linear-gradient(180deg, #1D1D1F 0%, #000000 100%);
+  --apple-gradient-bg-light: linear-gradient(180deg, #FBFBFD 0%, #F5F5F7 100%);
+  --apple-gradient-text-blue:  linear-gradient(90deg, #2997FF, #5AC8FA);
+  --apple-gradient-text-green: linear-gradient(90deg, #30D158, #00C7BE);
+  --apple-gradient-text-warm:  linear-gradient(90deg, #E8590C, #D63384);
+  --apple-gradient-text-purple: linear-gradient(90deg, #7B2FBE, #E040A0);
+
+  --apple-tracking-zh-title: 0.04em;
+  --apple-tracking-body: 0em;
+  --apple-leading-title: 1.1;
+  --apple-leading-title-loose: 1.15;
+  --apple-leading-body: 1.53;
+
+  --apple-font-size-hero:       56px;
+  --apple-font-size-hero-min:   48px;
+  --apple-font-size-hero-max:   80px;
+  --apple-font-size-subtitle:   28px;
+  --apple-font-size-subtitle-min: 24px;
+  --apple-font-size-body:       17px;
+  --apple-font-size-body-max:   21px;
+  --apple-font-size-caption:    12px;
+
+  --apple-font-display: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  --apple-font-text:    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+
+  --apple-breakpoint-sm: 734px;
+  --apple-breakpoint-md: 1068px;
+  --apple-breakpoint-lg: 1440px;
+
+  /* Data-specific accents (extends Apple palette) */
+  --data-green:  #2D8C3C;
+  --data-blue:   #0066CC;
+  --data-amber:  #E85D04;
+  --data-purple: #7B2FBE;
+}
+
+/* ==========================================================================
+   Reset & Base
+   ========================================================================== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--apple-font-text);
+  font-weight: var(--apple-weight-body);
+  color: var(--apple-text-primary);
+  background: var(--apple-bg-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; color: var(--apple-link-blue); }
+a:hover { color: var(--apple-link-blue-hover); }
+
+/* ==========================================================================
+   Content wrapper
+   ========================================================================== */
+.apple-content {
+  width: 100%; max-width: var(--apple-content-max-width);
+  margin-left: auto; margin-right: auto;
+  padding-left: 24px; padding-right: 24px;
+  box-sizing: border-box;
+}
+@media (min-width: 1440px) {
+  .apple-content { max-width: var(--apple-content-max-width-lg); }
+}
+@media (max-width: 733px) {
+  .apple-content { padding-left: 20px; padding-right: 20px; }
+}
+
+/* ==========================================================================
+   Section spacing
+   ========================================================================== */
+.apple-section {
+  padding-top: var(--apple-section-gap);
+  padding-bottom: var(--apple-section-gap);
+}
+.apple-section--gray { background: var(--apple-bg-light-gray); }
+@media (max-width: 733px) {
+  .apple-section { padding-top: 60px; padding-bottom: 60px; }
+}
+@media (min-width: 734px) and (max-width: 1067px) {
+  .apple-section {
+    padding-top: var(--apple-section-gap-sm);
+    padding-bottom: var(--apple-section-gap-sm);
+  }
+}
+
+/* ==========================================================================
+   Nav — minimal, frosted
+   ========================================================================== */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 48px; padding: 0 28px;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.nav-brand { font-size: 14px; font-weight: var(--apple-weight-title); color: var(--apple-text-primary); display: flex; align-items: center; gap: 8px; }
+.nav-brand-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--apple-link-blue); }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a { font-size: 13px; color: var(--apple-text-secondary); font-weight: var(--apple-weight-body); transition: color 0.2s; }
+.nav-links a:hover { color: var(--apple-text-primary); text-decoration: none; }
+
+/* ==========================================================================
+   Hero — light variant, Apple-style light hero
+   ========================================================================== */
+.hero {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 92vh;
+  background: var(--apple-bg-white);
+  color: var(--apple-text-primary);
+  text-align: center;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(41,151,255,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(48,209,88,0.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero__content {
+  display: flex; flex-direction: column; align-items: center;
+  gap: var(--apple-component-gap-sm);
+  padding-top: var(--apple-section-gap);
+  padding-bottom: var(--apple-section-gap);
+  position: relative; z-index: 1;
+}
+.hero__eyebrow {
+  font-family: var(--apple-font-text);
+  font-size: var(--apple-font-size-subtitle-min);
+  font-weight: var(--apple-weight-body-medium);
+  line-height: var(--apple-leading-body);
+  letter-spacing: var(--apple-tracking-zh-title);
+  color: var(--apple-text-tertiary);
+}
+.hero__headline {
+  font-family: var(--apple-font-display);
+  font-size: var(--apple-font-size-hero-min);
+  font-weight: var(--apple-weight-title-black);
+  line-height: var(--apple-leading-title);
+  letter-spacing: var(--apple-tracking-zh-title);
+  color: var(--apple-text-primary);
+}
+.hero__headline--gradient {
+  background: var(--apple-gradient-text-blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero__subtitle {
+  font-family: var(--apple-font-text);
+  font-size: var(--apple-font-size-subtitle);
+  font-weight: var(--apple-weight-body);
+  line-height: var(--apple-leading-body);
+  color: var(--apple-text-tertiary);
+  max-width: 680px;
+}
+@media (min-width: 734px)  { .hero__headline { font-size: var(--apple-font-size-hero); } }
+@media (min-width: 1068px) { .hero__headline { font-size: var(--apple-font-size-hero-max); } }
+
+/* ==========================================================================
+   Entry Grid — Apple product grid pattern
+   ========================================================================== */
+.entry-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--apple-component-gap-md);
+  margin-top: 48px;
+}
+@media (min-width: 734px)  { .entry-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1068px) { .entry-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.entry-card {
+  background: var(--apple-bg-white);
+  border-radius: var(--apple-radius-card);
+  padding: var(--apple-card-padding);
+  box-shadow: var(--apple-shadow-card);
+  display: flex; flex-direction: column; align-items: flex-start;
+  gap: var(--apple-component-gap-sm);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+.entry-card:hover {
+  box-shadow: var(--apple-shadow-hover);
+  transform: translateY(-4px);
+}
+
+.entry-card__icon {
+  width: 48px; height: 48px;
+  border-radius: var(--apple-radius-card-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; flex-shrink: 0;
+}
+.entry-card:nth-child(1) .entry-card__icon { background: rgba(0,102,204,0.08); }
+.entry-card:nth-child(2) .entry-card__icon { background: rgba(45,140,60,0.08); }
+.entry-card:nth-child(3) .entry-card__icon { background: rgba(232,93,4,0.08); }
+.entry-card:nth-child(4) .entry-card__icon { background: rgba(123,47,190,0.08); }
+
+.entry-card__title {
+  font-family: var(--apple-font-display);
+  font-size: var(--apple-font-size-subtitle-min);
+  font-weight: var(--apple-weight-title);
+  line-height: var(--apple-leading-title);
+  letter-spacing: var(--apple-tracking-zh-title);
+  color: var(--apple-text-primary);
+}
+.entry-card__desc {
+  font-family: var(--apple-font-text);
+  font-size: var(--apple-font-size-body);
+  font-weight: var(--apple-weight-body);
+  line-height: var(--apple-leading-body);
+  color: var(--apple-text-secondary);
+}
+.entry-card__stat {
+  margin-top: auto;
+  display: flex; align-items: baseline; gap: 4px;
+}
+.entry-card__stat b {
+  font-family: var(--apple-font-display);
+  font-size: 28px; font-weight: var(--apple-weight-title-bold);
+  letter-spacing: var(--apple-tracking-zh-title);
+}
+.entry-card:nth-child(1) .entry-card__stat b { color: var(--data-blue); }
+.entry-card:nth-child(2) .entry-card__stat b { color: var(--data-green); }
+.entry-card:nth-child(3) .entry-card__stat b { color: var(--data-amber); }
+.entry-card:nth-child(4) .entry-card__stat b { color: var(--data-purple); }
+.entry-card__stat span {
+  font-family: var(--apple-font-text);
+  font-size: var(--apple-font-size-caption);
+  color: var(--apple-text-tertiary);
+}
+
+/* ==========================================================================
+   KPI row — clean stat line
+   ========================================================================== */
+.kpi-row {
+  display: flex; gap: 0;
+}
+.kpi {
+  flex: 1; padding: 28px 0;
+  display: flex; flex-direction: column; gap: 2px;
+  border-right: 1px solid rgba(0,0,0,0.06);
+}
+.kpi:last-child { border-right: none; }
+.kpi:first-child { padding-left: 0; }
+.kpi-label {
+  font-family: var(--apple-font-text);
+  font-size: var(--apple-font-size-caption);
+  font-weight: var(--apple-weight-body-medium);
+  color: var(--apple-text-tertiary);
+  letter-spacing: var(--apple-tracking-zh-title);
+}
+.kpi-val {
+  font-family: var(--apple-font-display);
+  font-size: 40px;
+  font-weight: var(--apple-weight-title-bold);
+  letter-spacing: var(--apple-tracking-zh-title);
+  line-height: var(--apple-leading-title);
+}
+.kpi-sub {
+  font-family: var(--apple-font-text);
+  font-size: var(--apple-font-size-caption);
+  color: var(--apple-text-tertiary);
+}
+@media (max-width: 733px) {
+  .kpi-row { flex-wrap: wrap; }
+  .kpi { flex: 1 1 40%; border: none; padding: 16px 0; }
+  .kpi-val { font-size: 32px; }
+}
+
+/* ==========================================================================
+   Filter bar
+   ========================================================================== */
+.filter-bar {
+  display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  margin-bottom: var(--apple-component-gap-md);
+}
+.filter-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 8px 16px;
+  border-radius: var(--apple-radius-button);
+  font-family: var(--apple-font-text);
+  font-size: 14px; font-weight: var(--apple-weight-body);
+  color: var(--apple-text-secondary);
+  background: var(--apple-bg-light-gray);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.filter-pill:hover { background: #E8E8ED; color: var(--apple-text-primary); }
+.filter-pill.on {
+  background: var(--apple-link-blue);
+  color: var(--apple-text-white);
+}
+.filter-search {
+  flex: 1; min-width: 200px;
+  padding: 8px 18px;
+  border-radius: var(--apple-radius-button);
+  border: 1px solid rgba(0,0,0,0.12);
+  font-family: var(--apple-font-text);
+  font-size: 14px; color: var(--apple-text-primary);
+  outline: none; background: var(--apple-bg-white);
+  transition: border-color 0.2s;
+}
+.filter-search::placeholder { color: var(--apple-text-tertiary); }
+.filter-search:focus { border-color: var(--apple-link-blue); }
+
+/* ==========================================================================
+   Table
+   ========================================================================== */
+.table-shell {
+  border-radius: var(--apple-radius-card);
+  overflow: hidden;
+  box-shadow: var(--apple-shadow-card);
+}
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%; border-collapse: collapse;
+  font-family: var(--apple-font-text);
+  font-size: 14px;
+}
+thead th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 11px; font-weight: var(--apple-weight-title);
+  letter-spacing: 0.06em;
+  color: var(--apple-text-tertiary);
+  background: var(--apple-bg-light-gray);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  white-space: nowrap;
+}
+tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  background: var(--apple-bg-white);
+  white-space: nowrap;
+}
+tbody tr { transition: background 0.12s; cursor: pointer; }
+tbody tr:hover td { background: var(--apple-bg-elevated); }
+.td-title { max-width: 320px; overflow: hidden; text-overflow: ellipsis; display: block; }
+
+/* Status */
+.status { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; font-weight: var(--apple-weight-body-medium); }
+.status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.status--awarded { color: var(--data-green); }
+.status--awarded::before { background: var(--data-green); }
+.status--active { color: var(--data-blue); }
+.status--active::before { background: var(--data-blue); }
+.status--preview { color: var(--data-amber); }
+.status--preview::before { background: var(--data-amber); }
+
+/* Tag */
+.tag {
+  display: inline-block; padding: 2px 8px;
+  border-radius: var(--apple-radius-badge);
+  font-size: 12px; font-weight: var(--apple-weight-body-medium);
+  background: var(--apple-bg-light-gray);
+  color: var(--apple-text-secondary);
+}
+.tag + .tag { margin-left: 4px; }
+
+.amount { font-weight: var(--apple-weight-title); }
+
+/* ==========================================================================
+   Sheet — Apple-style slide-over
+   ========================================================================== */
+.sheet-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.2);
+  z-index: 90;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.sheet-overlay.on { opacity: 1; pointer-events: auto; }
+
+.sheet {
+  position: fixed; top: 0; right: 0;
+  width: 440px; max-width: 100vw; height: 100vh;
+  z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border-left: 1px solid rgba(0,0,0,0.06);
+  box-shadow: -8px 0 40px rgba(0,0,0,0.08);
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow-y: auto;
+  padding: 36px 32px 60px;
+}
+.sheet.on { transform: translateX(0); }
+
+.sheet-close {
+  position: absolute; top: 20px; right: 20px;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(0,0,0,0.04);
+  border: none; color: var(--apple-text-secondary);
+  font-size: 18px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+.sheet-close:hover { background: rgba(0,0,0,0.08); }
+
+.sheet h3 {
+  font-family: var(--apple-font-display);
+  font-size: var(--apple-font-size-subtitle-min);
+  font-weight: var(--apple-weight-title-bold);
+  letter-spacing: var(--apple-tracking-zh-title);
+  margin-bottom: 20px;
+}
+.sheet-field {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 11px 0; gap: 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  font-size: 14px;
+}
+.sheet-field .k { color: var(--apple-text-tertiary); flex-shrink: 0; }
+.sheet-field .v { color: var(--apple-text-primary); text-align: right; word-break: break-all; }
+.sheet-field .v a { color: var(--apple-link-blue); }
+
+.sheet-btn {
+  display: block; margin-top: 24px; padding: 11px 0;
+  text-align: center;
+  font-family: var(--apple-font-text);
+  font-size: var(--apple-font-size-body); font-weight: var(--apple-weight-title);
+  color: var(--apple-text-white);
+  background: var(--apple-link-blue);
+  border-radius: var(--apple-radius-button);
+  transition: all 0.2s;
+}
+.sheet-btn:hover { background: var(--apple-link-blue-hover); color: var(--apple-text-white); }
+
+/* ==========================================================================
+   Demo layout — side-by-side table + sheet
+   ========================================================================== */
+.demo-row { display: flex; gap: 20px; }
+.demo-main { flex: 1; min-width: 0; }
+.demo-sheet {
+  width: 380px; flex-shrink: 0;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border-radius: var(--apple-radius-card);
+  box-shadow: var(--apple-shadow-card);
+  border: 1px solid rgba(0,0,0,0.04);
+  padding: 28px;
+}
+@media (max-width: 900px) {
+  .demo-row { flex-direction: column; }
+  .demo-sheet { width: 100%; }
+}
+
+/* ==========================================================================
+   Section headings (Apple style)
+   ========================================================================== */
+.section-heading {
+  font-family: var(--apple-font-display);
+  font-size: var(--apple-font-size-hero-min);
+  font-weight: var(--apple-weight-title-heavy);
+  line-height: var(--apple-leading-title);
+  letter-spacing: var(--apple-tracking-zh-title);
+  color: var(--apple-text-primary);
+  margin-bottom: 4px;
+}
+.section-heading--gradient {
+  background: var(--apple-gradient-text-blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.section-sub {
+  font-family: var(--apple-font-text);
+  font-size: var(--apple-font-size-subtitle);
+  font-weight: var(--apple-weight-body);
+  line-height: var(--apple-leading-body);
+  color: var(--apple-text-tertiary);
+  margin-bottom: var(--apple-component-gap-lg);
+  max-width: 540px;
+}
+@media (min-width: 734px)  { .section-heading { font-size: var(--apple-font-size-hero); } }
+@media (min-width: 1068px) { .section-heading { font-size: var(--apple-font-size-hero-max); } }
+
+/* ==========================================================================
+   Scroll reveal
+   ========================================================================== */
+.scroll-reveal {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.scroll-reveal--d1 { transition-delay: 0.15s; }
+.scroll-reveal--d2 { transition-delay: 0.3s; }
+.scroll-reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer {
+  background: var(--apple-bg-light-gray);
+  padding: var(--apple-component-gap-lg) 0;
+  text-align: center;
+}
+.footer p {
+  font-family: var(--apple-font-text);
+  font-size: var(--apple-font-size-caption);
+  color: var(--apple-text-tertiary);
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-brand"><span class="nav-brand-dot"></span>零碳园区招标平台</div>
+  <div class="nav-links">
+    <a href="#">数据概览</a>
+    <a href="#">招标检索</a>
+    <a href="#">关于</a>
+  </div>
+</nav>
+
+<!-- ======================================================================
+     Hero — dark, full-screen
+     ====================================================================== -->
+<section class="hero">
+  <div class="apple-content hero__content">
+    <p class="hero__eyebrow">Zero‑Carbon Park Bidding</p>
+    <h1 class="hero__headline hero__headline--gradient">零碳园区<br>招标信息平台</h1>
+    <p class="hero__subtitle">洞察招标趋势，把握零碳先机，四大视角精准聚焦。</p>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Entry Cards — Apple product grid
+     ====================================================================== -->
+<section class="apple-section apple-section--gray">
+  <div class="apple-content">
+    <div class="scroll-reveal">
+      <h2 class="section-heading">四个视角，各取所需</h2>
+      <p class="section-sub">同一份数据，四种切法。选对你的身份，信息自然到位。</p>
+    </div>
+    <div class="entry-grid">
+      <div class="entry-card scroll-reveal scroll-reveal--d1">
+        <div class="entry-card__icon">💰</div>
+        <h3 class="entry-card__title">投资者视角</h3>
+        <p class="entry-card__desc">金额区间 · 中标方 · 园区级别。判断零碳赛道投资机会。</p>
+        <div class="entry-card__stat"><b>66</b><span>条中标记录</span></div>
+      </div>
+      <div class="entry-card scroll-reveal scroll-reveal--d1">
+        <div class="entry-card__icon">🔧</div>
+        <h3 class="entry-card__title">供应商视角</h3>
+        <p class="entry-card__desc">工程内容 · 项目阶段 · 截止日。发现可投标的活跃项目。</p>
+        <div class="entry-card__stat"><b>56</b><span>条招标中 / 预告</span></div>
+      </div>
+      <div class="entry-card scroll-reveal scroll-reveal--d2">
+        <div class="entry-card__icon">🏭</div>
+        <h3 class="entry-card__title">运营方视角</h3>
+        <p class="entry-card__desc">地区分布 · 招标动态。参考同类型园区采购情况。</p>
+        <div class="entry-card__stat"><b>30</b><span>个覆盖省份</span></div>
+      </div>
+      <div class="entry-card scroll-reveal scroll-reveal--d2">
+        <div class="entry-card__icon">🌐</div>
+        <h3 class="entry-card__title">全局观察</h3>
+        <p class="entry-card__desc">全维度数据仪表盘。一览全局，不设边界。</p>
+        <div class="entry-card__stat"><b>129</b><span>条全量记录</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     KPI row
+     ====================================================================== -->
+<section class="apple-section">
+  <div class="apple-content">
+    <div class="scroll-reveal">
+      <h2 class="section-heading">一目了然</h2>
+      <p class="section-sub">核心指标，一屏掌握。</p>
+    </div>
+    <div class="kpi-row scroll-reveal scroll-reveal--d1">
+      <div class="kpi">
+        <span class="kpi-label">总记录数</span>
+        <span class="kpi-val">129</span>
+        <span class="kpi-sub">本月新增 +12</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">验证通过率</span>
+        <span class="kpi-val" style="color:var(--data-green)">99.2%</span>
+        <span class="kpi-sub">128 / 129 条已验证</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">覆盖省份</span>
+        <span class="kpi-val">30</span>
+        <span class="kpi-sub">/ 31 省级行政区</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">金额可查率</span>
+        <span class="kpi-val">77%</span>
+        <span class="kpi-sub">100 条披露金额</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">数据更新</span>
+        <span class="kpi-val" style="font-size:32px;">07-20</span>
+        <span class="kpi-sub">6 小时前</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Filter + Table
+     ====================================================================== -->
+<section class="apple-section apple-section--gray">
+  <div class="apple-content">
+    <div class="scroll-reveal">
+      <h2 class="section-heading">招标检索</h2>
+      <p class="section-sub">多维筛选 + 关键词搜索。点击任意行查看详情。</p>
+    </div>
+
+    <div class="filter-bar scroll-reveal scroll-reveal--d1">
+      <span class="filter-pill on">全部省份</span>
+      <span class="filter-pill">招标状态</span>
+      <span class="filter-pill">工程内容</span>
+      <span class="filter-pill">金额区间</span>
+      <span class="filter-pill">项目阶段</span>
+      <input type="text" class="filter-search" placeholder="搜索标题、招标方...">
+    </div>
+
+    <div class="table-shell scroll-reveal scroll-reveal--d1">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>公告标题</th>
+              <th>省份</th>
+              <th>招标状态</th>
+              <th>工程内容</th>
+              <th>金额区间</th>
+              <th>招标方</th>
+              <th>发布日期</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="color:var(--apple-text-tertiary)">1</td>
+              <td><span class="td-title">"近零碳园区"项目(二次)中标（成交）结果公告</span></td>
+              <td>陕西</td>
+              <td><span class="status status--awarded">中标公示</span></td>
+              <td><span class="tag">规划咨询与认证</span></td>
+              <td class="amount">&lt;100万</td>
+              <td>宝鸡高新区工信商务局</td>
+              <td>2024-03-05</td>
+            </tr>
+            <tr>
+              <td style="color:var(--apple-text-tertiary)">2</td>
+              <td><span class="td-title">华润三九：近零碳园区技术标准编制与实施服务采购</span></td>
+              <td>广东</td>
+              <td><span class="status status--preview">预告/公告</span></td>
+              <td><span class="tag">规划咨询与认证</span></td>
+              <td class="amount">&lt;100万</td>
+              <td>华润三九医药股份有限公司</td>
+              <td>2026-02-26</td>
+            </tr>
+            <tr>
+              <td style="color:var(--apple-text-tertiary)">3</td>
+              <td><span class="td-title">三亚崖州湾科技城零碳园区规划及实施方案编制招标</span></td>
+              <td>海南</td>
+              <td><span class="status status--awarded">中标公示</span></td>
+              <td><span class="tag">规划咨询与认证</span></td>
+              <td class="amount">100-500万</td>
+              <td>三亚崖州湾科技城管理局</td>
+              <td>2023-06-21</td>
+            </tr>
+            <tr>
+              <td style="color:var(--apple-text-tertiary)">4</td>
+              <td><span class="td-title">大丰港国际合作绿色低碳产业园总体发展规划编制服务</span></td>
+              <td>江苏</td>
+              <td><span class="status status--active">招标中</span></td>
+              <td><span class="tag">规划咨询与认证</span><span class="tag">绿色建筑</span></td>
+              <td class="amount">100-500万</td>
+              <td>盐城市大丰区财政局</td>
+              <td>2025-02-20</td>
+            </tr>
+            <tr>
+              <td style="color:var(--apple-text-tertiary)">5</td>
+              <td><span class="td-title">第八师石河子市零碳园区建设及重点用能企业节能降碳服务</span></td>
+              <td>新疆</td>
+              <td><span class="status status--active">招标中</span></td>
+              <td><span class="tag">节能改造</span><span class="tag">规划咨询与认证</span></td>
+              <td class="amount" style="color:var(--data-green)">&gt;1亿</td>
+              <td>第八师石河子市发改委</td>
+              <td>2026-06-02</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Detail Sheet Demo
+     ====================================================================== -->
+<section class="apple-section">
+  <div class="apple-content">
+    <div class="scroll-reveal">
+      <h2 class="section-heading">轻触即达</h2>
+      <p class="section-sub">点击表格行，右侧滑出毛玻璃详情面板。25 个字段，完整呈现。</p>
+    </div>
+
+    <div class="demo-row scroll-reveal scroll-reveal--d1">
+      <div class="demo-main" style="background:var(--apple-bg-light-gray);border-radius:var(--apple-radius-card);padding:40px;display:flex;align-items:center;justify-content:center;min-height:320px;">
+        <span style="color:var(--apple-text-tertiary);font-size:15px;">← 表格区域</span>
+      </div>
+      <div class="demo-sheet">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <h3 style="margin:0;">公告详情</h3>
+          <button class="sheet-close" style="position:static;">&times;</button>
+        </div>
+        <div style="margin-bottom:18px;display:flex;gap:8px;align-items:center;">
+          <span class="status status--awarded">中标公示</span>
+          <span style="font-size:12px;color:var(--data-green);">已验证</span>
+        </div>
+
+        <div class="sheet-field"><span class="k">标题</span><span class="v">"近零碳园区"项目(二次)中标结果公告</span></div>
+        <div class="sheet-field"><span class="k">省份</span><span class="v">陕西 · 宝鸡</span></div>
+        <div class="sheet-field"><span class="k">招标状态</span><span class="v">中标公示</span></div>
+        <div class="sheet-field"><span class="k">工程内容</span><span class="v"><span class="tag">规划咨询与认证</span></span></div>
+        <div class="sheet-field"><span class="k">项目阶段</span><span class="v">咨询认证</span></div>
+        <div class="sheet-field"><span class="k">金额</span><span class="v" style="font-weight:var(--apple-weight-title-bold);font-size:16px;">950,000.00 元</span></div>
+        <div class="sheet-field"><span class="k">金额区间</span><span class="v">&lt;100万</span></div>
+        <div class="sheet-field"><span class="k">招标方</span><span class="v">宝鸡高新区工信商务局</span></div>
+        <div class="sheet-field"><span class="k">发布日期</span><span class="v">2024-03-05</span></div>
+        <div class="sheet-field"><span class="k">来源平台</span><span class="v">公共资源交易平台</span></div>
+        <div class="sheet-field"><span class="k">园区级别</span><span class="v">国家级</span></div>
+        <div class="sheet-field"><span class="k">原文链接</span><span class="v"><a href="#">sxggzyjy.cn ↗</a></span></div>
+
+        <a href="#" class="sheet-btn">打开原文链接</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="apple-content">
+    <p>数据来源：互联网公开招标公告 · 由大模型辅助结构化提取 · 仅供参考</p>
+  </div>
+</footer>
+
+<!-- Scroll reveal -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const reveals = document.querySelectorAll('.scroll-reveal');
+  if (!reveals.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+});
+</script>
+
+</body>
+</html>

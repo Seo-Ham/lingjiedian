@@ -1,0 +1,21 @@
+# API Keys
+.env
+
+# Temp files
+~$*.xlsx
+*.tmp
+
+# Dev artifacts
+.superpowers/
+
+# Generated intermediates
+quality-check.txt
+recovered_records.json
+bids_data_embedded.js
+logo-icon*.png
+logo-text*.png
+logo-horizontal.png
+
+# Working files
+hero-subscribe-preview.html
+零界点-backup.html
